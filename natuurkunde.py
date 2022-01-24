@@ -1,9 +1,6 @@
-import time
 import matplotlib.pyplot as plt
-import math
 
 a = 0
-g = 9.81
 t = 0
 dt = 0.01
 dx = 0
@@ -35,22 +32,17 @@ pa = []
 
 while(x > 0):
     print(x)
-    #fz = m * g
-    fzb = ma * m
-    fzo = ra + x
-    fzbr = fzb / (fzo * fzo)
-    fz = gc * fzbr
-    pw = x / 5500
-    r = 1.293 * math.pow(0.5, pw)
-    flw = 0.5 * r * cw * o * v * v 
-    fres = fz - flw
+    fg = gc * ((ma * m)/((ra + x)**2))      #gravitational force
+    r = 1.293 * (0.5**(x / 5500))           #rho, air density
+    flw = 0.5 * r * cw * o * v * v          #air resistance
+    fres = fg - flw
     a = fres / m 
     dv = a * dt
     v = v + dv
     dx = v * dt
     x = x - dx
     t = t + dt
-    c = c + 1
+    c = c + 1                               #counter
     pt.append(t)
     px.append(x)
     pv.append(v)
